@@ -39,6 +39,15 @@ xcodebuild -scheme "$SCHEME" -configuration Release \
   OTHER_CODE_SIGN_FLAGS="--options runtime --timestamp" \
   clean build
 
+echo "==> Stripping get-task-allow + re-signing for distribution (notarization forbids it)…"
+ENT="$(mktemp).plist"
+codesign -d --entitlements - "$APP" > "$ENT" 2>/dev/null || true
+/usr/libexec/PlistBuddy -c "Delete :com.apple.security.get-task-allow" "$ENT" 2>/dev/null || true
+codesign --force --options runtime --timestamp --entitlements "$ENT" --sign "$SIGN_ID" "$APP"
+if codesign -d --entitlements - "$APP" 2>/dev/null | grep -qi "get-task-allow"; then
+  echo "ERROR: get-task-allow still present"; exit 1
+fi
+
 echo "==> Packaging DMG…"
 rm -f "$DMG"
 hdiutil create -volname "ClipMind" -srcfolder "$APP" -ov -format UDZO "$DMG"
