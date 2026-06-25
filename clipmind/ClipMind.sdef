@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="ClipMind Terminology">
+    <!-- ClipMind Application Suite -->
+    <suite name="ClipMind Suite" code="CpMd" description="ClipMind clipboard manager commands and objects">
+
+        <!-- Application Class -->
+        <class name="application" code="capp" description="The ClipMind application" inherits="application">
+            <cocoa class="NSApplication"/>
+
+            <element type="clipboard item" access="r">
+                <cocoa key="clipboardItems"/>
+            </element>
+
+            <element type="workspace" access="r">
+                <cocoa key="workspaces"/>
+            </element>
+
+            <property name="item count" code="Citc" description="Number of clipboard items" type="integer" access="r">
+                <cocoa key="itemCount"/>
+            </property>
+
+            <responds-to command="search">
+                <cocoa method="search:"/>
+            </responds-to>
+
+            <responds-to command="copy item">
+                <cocoa method="copyItem:"/>
+            </responds-to>
+
+            <responds-to command="delete item">
+                <cocoa method="deleteItem:"/>
+            </responds-to>
+
+            <responds-to command="clear all">
+                <cocoa method="clearAll:"/>
+            </responds-to>
+        </class>
+
+        <!-- Clipboard Item Class -->
+        <class name="clipboard item" code="ClIt" description="A clipboard history item" plural="clipboard items">
+            <cocoa class="ScriptableClipboardItem"/>
+
+            <property name="id" code="ID  " description="Unique identifier" type="text" access="r">
+                <cocoa key="id"/>
+            </property>
+
+            <property name="content" code="Cont" description="Text content" type="text" access="r">
+                <cocoa key="content"/>
+            </property>
+
+            <property name="type" code="Type" description="Content type" type="text" access="r">
+                <cocoa key="type"/>
+            </property>
+
+            <property name="source app" code="SApp" description="Source application" type="text" access="r">
+                <cocoa key="sourceApp"/>
+            </property>
+
+            <property name="window title" code="WTit" description="Window title" type="text" access="r">
+                <cocoa key="windowTitle"/>
+            </property>
+
+            <property name="timestamp" code="Time" description="Creation timestamp" type="date" access="r">
+                <cocoa key="timestamp"/>
+            </property>
+
+            <property name="is sensitive" code="Sens" description="Whether item contains sensitive content" type="boolean" access="r">
+                <cocoa key="isSensitive"/>
+            </property>
+        </class>
+
+        <!-- Workspace Class -->
+        <class name="workspace" code="Wksp" description="A workspace for organizing clipboard items" plural="workspaces">
+            <cocoa class="ScriptableWorkspace"/>
+
+            <property name="id" code="ID  " description="Unique identifier" type="text" access="r">
+                <cocoa key="id"/>
+            </property>
+
+            <property name="name" code="pnam" description="Workspace name" type="text" access="r">
+                <cocoa key="name"/>
+            </property>
+
+            <property name="color" code="Colr" description="Workspace color" type="text" access="r">
+                <cocoa key="color"/>
+            </property>
+        </class>
+
+        <!-- Search Command -->
+        <command name="search" code="CpMdSrch" description="Search clipboard items">
+            <cocoa class="SearchCommand"/>
+            <direct-parameter description="Search query" type="text"/>
+            <result type="clipboard item" description="Matching clipboard items">
+                <cocoa key="results"/>
+            </result>
+        </command>
+
+        <!-- Copy Item Command -->
+        <command name="copy item" code="CpMdCopy" description="Copy item to clipboard">
+            <cocoa class="CopyItemCommand"/>
+            <direct-parameter description="Item ID" type="text"/>
+            <result type="boolean" description="Success">
+                <cocoa key="success"/>
+            </result>
+        </command>
+
+        <!-- Delete Item Command -->
+        <command name="delete item" code="CpMdDelt" description="Delete a clipboard item">
+            <cocoa class="DeleteItemCommand"/>
+            <direct-parameter description="Item ID" type="text"/>
+            <result type="boolean" description="Success">
+                <cocoa key="success"/>
+            </result>
+        </command>
+
+        <!-- Clear All Command -->
+        <command name="clear all" code="CpMdClAl" description="Clear all clipboard items">
+            <cocoa class="ClearAllCommand"/>
+            <result type="boolean" description="Success">
+                <cocoa key="success"/>
+            </result>
+        </command>
+
+        <!-- Get Items in Workspace Command -->
+        <command name="items in workspace" code="CpMdItWk" description="Get items in a workspace">
+            <cocoa class="ItemsInWorkspaceCommand"/>
+            <direct-parameter description="Workspace name" type="text"/>
+            <result type="clipboard item" description="Items in workspace">
+                <cocoa key="items"/>
+            </result>
+        </command>
+    </suite>
+</dictionary>

@@ -1,0 +1,39 @@
+# macOS
+.DS_Store
+*.swp
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+DerivedData/
+build/
+*.dSYM
+
+# Swift Package Manager
+/.build
+/Packages
+.swiftpm/
+
+# Node / Cloudflare Workers (api/)
+api/node_modules/
+api/dist/
+.wrangler/
+.dev.vars
+.netrc
+
+# Secrets & environment
+*.env
+.env*
+*.pem
+*.p12
+*.cer
+*.mobileprovision
+
+# Large/optional Core ML model (not referenced by code; add locally for on-device embeddings)
+/Models/
+clipmind/Resources/sentence_transformer_*.mlpackage/
+
+# Tooling scratch
+.claude-tasks.md
+.cursor/

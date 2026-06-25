@@ -1,0 +1,21 @@
+{
+	"name": "api",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"typescript": "^5.5.2",
+		"wrangler": "^4.46.0"
+	},
+	"dependencies": {
+		"bcryptjs": "^3.0.3",
+		"hono": "^4.10.4",
+		"jose": "^6.1.0",
+		"zod": "^4.1.12"
+	}
+}
